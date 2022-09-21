@@ -18,7 +18,7 @@ int16_t DISPLAY_WIDTH = tft.width();
 
 int menuList(const char* title, const String list[]);
 String getStringMenu(const char* title);
-int getIntVal(const char* title, const char* valName, const int min, const int max, const int initVal, const char* units);
+int getIntVal(const String& title, const String& valName, const int min, const int max, const int initVal, const String& units);
 
 byte checkBT_DW();
 byte checkBT_UP();
@@ -50,6 +50,7 @@ void menu()
   delay(1000);
 
   String menuItemsZone[30] = {"Eur/Warsaw", "Eur/+2", "BASS", "US/TX", "dupa jasiu stasiu pupasiu pierdziasiu", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"};
+  menuItemsZone[2] = "BASS    -16dB";
   if (menuList("Time zone:", menuItemsZone) == 2)
   {
     getIntVal("Tone", "BASS", -20, 20, 0, "dB");
@@ -61,7 +62,7 @@ void menu()
 
 int16_t printLine(const String& txt, const int16_t x, const int16_t y, const uint16_t bg);
 int16_t printRotateLine(const String& txt, const int16_t x, const int16_t y, const uint16_t bg);
-int getIntVal(const char* title, const char* valName, const int min, const int max, const int initVal, const char* units);
+
 int menuList(const char* title, const String list[])
 {
   byte bt;
@@ -126,7 +127,7 @@ int menuList(const char* title, const String list[])
     printRotateLine(list[indx], 0, line * LINE_HEIGHT, TFT_GREEN);
   }
 }
-int getIntVal(const char* title, const char* valName, const int min, const int max, const int initVal, const char* units)
+int getIntVal(const String& title, const String& valName, const int min, const int max, const int initVal, const String& units)
 {
   int val = initVal;
   byte bt;
@@ -141,18 +142,19 @@ int getIntVal(const char* title, const char* valName, const int min, const int m
   for (;;)
   {
     bt = checkBT_UP();
-    if (bt == 2 && val <max)
+    if (bt == 2 && val < max)
       val ++;
     bt = checkBT_DW();
     if (bt == 2 && val > min)
-        val --;
+      val --;
     else if ( bt == 3)
       return val;
-    tft.setCursor (0, 3 * LINE_HEIGHT);
-    tft.print( valName );
-    tft.print( " : " );
-    tft.print( val );
-    tft.print( units );
+    printLine(valName + " : " + val + units, 0, 3 * LINE_HEIGHT, TFT_BLACK);
+//    tft.setCursor (0, 3 * LINE_HEIGHT);
+//    tft.print( valName );
+//    tft.print( " : " );
+//    tft.print( val );
+//    tft.print( units );
     delay(100);
   }
 }
@@ -283,6 +285,7 @@ int16_t printRotateLine(const String& txt, const int16_t x, int16_t y, const uin
   static int16_t coly = 0;
   static bool shiftL = false;
   tft.setTextColor(TFT_WHITE, bg);
+  int16_t DISPLAY_WIDTH = tft.width();
   if ((x + txtW) > DISPLAY_WIDTH) {
     tft.drawString(txt, coly + x, y);
     if (shiftL) {
