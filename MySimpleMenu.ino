@@ -23,7 +23,7 @@ String pass;
 unsigned int localPort = 8888;  // local port to listen for UDP packets
 
 TFT_eSPI tft = TFT_eSPI();  // Invoke library, pins defined in User_Setup.h
-#include "setup.h"
+#include "menu.h"
 
 byte omm = 99;
 bool initial = 1;

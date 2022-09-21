@@ -18,6 +18,7 @@ int16_t DISPLAY_WIDTH = tft.width();
 
 int menuList(const char* title, const String list[]);
 String getStringMenu(const char* title);
+int getIntVal(const char* title, const char* valName, const int min, const int max, const int initVal, const char* units);
 
 byte checkBT_DW();
 byte checkBT_UP();
@@ -48,15 +49,19 @@ void menu()
   //  EEPROM.commit();
   delay(1000);
 
-  String menuItemsZone[30] = {"Eur/Warsaw", "Eur/+2", "Eur/+3", "US/TX", "dupa jasiu stasiu pupasiu pierdziasiu", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"};
-  menuList("Time zone:", menuItemsZone);
+  String menuItemsZone[30] = {"Eur/Warsaw", "Eur/+2", "BASS", "US/TX", "dupa jasiu stasiu pupasiu pierdziasiu", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"};
+  if (menuList("Time zone:", menuItemsZone) == 2)
+  {
+    getIntVal("Tone", "BASS", -20, 20, 0, "dB");
+  }
+
 }
 
 
 
 int16_t printLine(const String& txt, const int16_t x, const int16_t y, const uint16_t bg);
 int16_t printRotateLine(const String& txt, const int16_t x, const int16_t y, const uint16_t bg);
-
+int getIntVal(const char* title, const char* valName, const int min, const int max, const int initVal, const char* units);
 int menuList(const char* title, const String list[])
 {
   byte bt;
@@ -97,7 +102,6 @@ int menuList(const char* title, const String list[])
         else {
           printLine(list[indx++], 0, line++ * LINE_HEIGHT, TFT_BLACK);
         }
-        //          printLine(list[indx], 0, line * LINE_HEIGHT, TFT_GREEN);
       }
 
     }
@@ -116,11 +120,40 @@ int menuList(const char* title, const String list[])
         else {
           printLine(list[indx--], 0, line-- * LINE_HEIGHT, TFT_BLACK);
         }
-        //          printLine(list[indx], 0, line * LINE_HEIGHT, TFT_GREEN);
       }
     }
     delay(30);
     printRotateLine(list[indx], 0, line * LINE_HEIGHT, TFT_GREEN);
+  }
+}
+int getIntVal(const char* title, const char* valName, const int min, const int max, const int initVal, const char* units)
+{
+  int val = initVal;
+  byte bt;
+  tft.fillScreen(TFT_BLACK);
+  tft.setCursor (0, 0);
+  //print title
+  tft.setTextColor(TFT_WHITE, TFT_BLUE);
+  tft.println(title);
+
+  tft.setCursor (0, 3 * LINE_HEIGHT);
+  tft.setTextColor(TFT_WHITE, TFT_BLACK);
+  for (;;)
+  {
+    bt = checkBT_UP();
+    if (bt == 2 && val <max)
+      val ++;
+    bt = checkBT_DW();
+    if (bt == 2 && val > min)
+        val --;
+    else if ( bt == 3)
+      return val;
+    tft.setCursor (0, 3 * LINE_HEIGHT);
+    tft.print( valName );
+    tft.print( " : " );
+    tft.print( val );
+    tft.print( units );
+    delay(100);
   }
 }
 
@@ -246,27 +279,27 @@ int16_t printLine(const String& txt, const int16_t x, const int16_t y, const uin
 
 int16_t printRotateLine(const String& txt, const int16_t x, int16_t y, const uint16_t bg)
 {
-    int16_t txtW = tft.textWidth(txt);
-    static int16_t coly =0;
-    static bool shiftL = false;
-    tft.setTextColor(TFT_WHITE, bg);
-    if ((x+txtW) > DISPLAY_WIDTH) {
-      tft.drawString(txt, coly+x, y);
-      if (shiftL) {
-        if ( coly >= -( txtW - DISPLAY_WIDTH+x +10))
-          coly--;
-        else
-          shiftL = false;
-      }
-      else {
-
-        if (coly < 10)
-          coly++;
-        else
-          shiftL = true;
-      }
-      return DISPLAY_WIDTH;
+  int16_t txtW = tft.textWidth(txt);
+  static int16_t coly = 0;
+  static bool shiftL = false;
+  tft.setTextColor(TFT_WHITE, bg);
+  if ((x + txtW) > DISPLAY_WIDTH) {
+    tft.drawString(txt, coly + x, y);
+    if (shiftL) {
+      if ( coly >= -( txtW - DISPLAY_WIDTH + x + 10))
+        coly--;
+      else
+        shiftL = false;
     }
-    else
-      return x+tft.drawString(txt, x, y);
+    else {
+
+      if (coly < 0)
+        coly++;
+      else
+        shiftL = true;
+    }
+    return DISPLAY_WIDTH;
+  }
+  else
+    return x + tft.drawString(txt, x, y);
 }

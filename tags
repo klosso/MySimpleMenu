@@ -1,0 +1,88 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/smikulsk/Arduino/MySimpleMenu/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20220828.0/
+BST	NTP_Time.h	/^TimeChangeRule BST = {"BST", Last, Sun, Mar, 1, 60};        \/\/British Summer (Daylight saving)/;"	v	typeref:typename:TimeChangeRule
+BTN_DW	menu.h	/^#define BTN_DW /;"	d
+BTN_UP	menu.h	/^#define BTN_UP /;"	d
+CEST	NTP_Time.h	/^TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     \/\/Central European Summer Time$/;"	v	typeref:typename:TimeChangeRule
+CET	NTP_Time.h	/^TimeChangeRule  CET = {"CET ", Last, Sun, Oct, 3, 60};      \/\/Central European Standard Time$/;"	v	typeref:typename:TimeChangeRule
+DISPLAY_WIDTH	menu.h	/^int16_t DISPLAY_WIDTH = tft.width();$/;"	v	typeref:typename:int16_t
+FONT_LINE_WIDTH	menu.h	/^byte FONT_LINE_WIDTH = tft.width() \/ tft.textWidth(".", 1);$/;"	v	typeref:typename:byte
+GMT	NTP_Time.h	/^TimeChangeRule GMT = {"GMT", Last, Sun, Oct, 2, 0};         \/\/Standard Time$/;"	v	typeref:typename:TimeChangeRule
+LINE_HEIGHT	menu.h	/^int LINE_HEIGHT = 12;$/;"	v	typeref:typename:int
+LONG_PRESS	menu.h	/^#define LONG_PRESS /;"	d
+MAX_LINES	menu.h	/^#define MAX_LINES /;"	d
+MySimpleMenu	README.md	/^# MySimpleMenu$/;"	c
+NTP_PACKET_SIZE	NTP_Time.h	/^const int NTP_PACKET_SIZE = 48; \/\/ NTP time stamp is in the first 48 bytes of the message$/;"	v	typeref:typename:const int
+TIMEZONE	NTP_Time.h	/^#define TIMEZONE /;"	d
+aEDT	NTP_Time.h	/^TimeChangeRule aEDT = {"AEDT", First, Sun, Oct, 2, 660};    \/\/UTC + 11 hours$/;"	v	typeref:typename:TimeChangeRule
+aEST	NTP_Time.h	/^TimeChangeRule aEST = {"AEST", First, Sun, Apr, 3, 600};    \/\/UTC + 10 hours$/;"	v	typeref:typename:TimeChangeRule
+battery0_bits	battery.h	/^static unsigned char battery0_bits[] = {$/;"	v	typeref:typename:unsigned char[]
+battery0_height	battery.h	/^#define battery0_height /;"	d
+battery0_width	battery.h	/^#define battery0_width /;"	d
+battery1_bits	battery.h	/^static unsigned char battery1_bits[] = {$/;"	v	typeref:typename:unsigned char[]
+battery1_height	battery.h	/^#define battery1_height /;"	d
+battery1_width	battery.h	/^#define battery1_width /;"	d
+battery2_bits	battery.h	/^static unsigned char battery2_bits[] = {$/;"	v	typeref:typename:unsigned char[]
+battery2_height	battery.h	/^#define battery2_height /;"	d
+battery2_width	battery.h	/^#define battery2_width /;"	d
+battery3_bits	battery.h	/^static unsigned char battery3_bits[] = {$/;"	v	typeref:typename:unsigned char[]
+battery3_height	battery.h	/^#define battery3_height /;"	d
+battery3_width	battery.h	/^#define battery3_width /;"	d
+battery4_bits	battery.h	/^static unsigned char battery4_bits[] = {$/;"	v	typeref:typename:unsigned char[]
+battery4_height	battery.h	/^#define battery4_height /;"	d
+battery4_width	battery.h	/^#define battery4_width /;"	d
+battery5_bits	battery.h	/^static unsigned char battery5_bits[] = {$/;"	v	typeref:typename:unsigned char[]
+battery5_height	battery.h	/^#define battery5_height /;"	d
+battery5_width	battery.h	/^#define battery5_width /;"	d
+checkBT_DW	menu.h	/^byte checkBT_DW()$/;"	f	typeref:typename:byte
+checkBT_UP	menu.h	/^byte checkBT_UP()$/;"	f	typeref:typename:byte
+decodeNTP	NTP_Time.h	/^bool decodeNTP(void)$/;"	f	typeref:typename:bool
+eepromPASS	menu.h	/^#define eepromPASS /;"	d
+eepromSSID	menu.h	/^#define eepromSSID /;"	d
+getStringMenu	menu.h	/^String getStringMenu(const char* title)$/;"	f	typeref:typename:String
+lastMinute	NTP_Time.h	/^uint8_t lastMinute = 0;$/;"	v	typeref:typename:uint8_t
+lastRecvTime	NTP_Time.h	/^uint32_t lastRecvTime = 0;$/;"	v	typeref:typename:uint32_t
+lastTickTime	NTP_Time.h	/^uint32_t lastTickTime = 0;$/;"	v	typeref:typename:uint32_t
+localPort	NTP_Time.h	/^unsigned int localPort = 2390;      \/\/ local port to listen for UDP packets$/;"	v	typeref:typename:unsigned int
+menu	menu.h	/^void menu()$/;"	f	typeref:typename:void
+menuList	menu.h	/^int menuList(const char* title, const String list[])$/;"	f	typeref:typename:int
+newRecvTime	NTP_Time.h	/^uint32_t newRecvTime = 0;$/;"	v	typeref:typename:uint32_t
+newTickTime	NTP_Time.h	/^uint32_t newTickTime = 0;$/;"	v	typeref:typename:uint32_t
+nextSendTime	NTP_Time.h	/^uint32_t nextSendTime = 0;$/;"	v	typeref:typename:uint32_t
+no_packet_count	NTP_Time.h	/^uint32_t no_packet_count = 0;$/;"	v	typeref:typename:uint32_t
+ntpServerName	NTP_Time.h	/^const char* ntpServerName = "pool.ntp.org";$/;"	v	typeref:typename:const char *
+ntpServerName	NTP_Time.h	/^const char* ntpServerName = "time.google.com";$/;"	v	typeref:typename:const char *
+ntp_start	NTP_Time.h	/^bool ntp_start = 1;$/;"	v	typeref:typename:bool
+packetBuffer	NTP_Time.h	/^byte packetBuffer[ NTP_PACKET_SIZE ]; \/\/buffer to hold incoming and outgoing packets$/;"	v	typeref:typename:byte[]
+pressTime	menu.h	/^long pressTime;$/;"	v	typeref:typename:long
+pressedBT_DW	menu.h	/^bool pressedBT_DW = false;$/;"	v	typeref:typename:bool
+pressedBT_UP	menu.h	/^bool pressedBT_UP = false;$/;"	v	typeref:typename:bool
+printLine	menu.h	/^int16_t printLine(const String& txt, const int16_t x, const int16_t y, const uint16_t bg)$/;"	f	typeref:typename:int16_t
+printResponseTime	NTP_Time.h	/^void printResponseTime(uint32_t response, uint32_t  syncTime)$/;"	f	typeref:typename:void
+printRotateLine	menu.h	/^int16_t printRotateLine(const String& txt, const int16_t x, int16_t y, const uint16_t bg)$/;"	f	typeref:typename:int16_t
+printTime	NTP_Time.h	/^void printTime(time_t t, char *tzCode)$/;"	f	typeref:typename:void
+printUTC	NTP_Time.h	/^void printUTC(time_t utc)$/;"	f	typeref:typename:void
+sendNTPpacket	NTP_Time.h	/^void sendNTPpacket(IPAddress& address)$/;"	f	typeref:typename:void
+syncTime	NTP_Time.h	/^bool syncTime(void)$/;"	f	typeref:typename:bool
+timeServerIP	NTP_Time.h	/^IPAddress timeServerIP;                     \/\/ Use server pool$/;"	v	typeref:typename:IPAddress
+timeValid	NTP_Time.h	/^bool timeValid = false;$/;"	v	typeref:typename:bool
+tz1_Code	NTP_Time.h	/^TimeChangeRule *tz1_Code;   \/\/ Pointer to the time change rule, use to get the TZ abbrev, e.g./;"	v	typeref:typename:TimeChangeRule *
+udp	NTP_Time.h	/^WiFiUDP udp;$/;"	v	typeref:typename:WiFiUDP
+usCDT	NTP_Time.h	/^TimeChangeRule usCDT = {"CDT", Second, dowSunday, Mar, 2, -300};$/;"	v	typeref:typename:TimeChangeRule
+usCST	NTP_Time.h	/^TimeChangeRule usCST = {"CST", First, dowSunday, Nov, 2, -360};$/;"	v	typeref:typename:TimeChangeRule
+usEDT	NTP_Time.h	/^TimeChangeRule usEDT = {"EDT", Second, Sun, Mar, 2, -240};  \/\/Eastern Daylight Time = UTC - 4 /;"	v	typeref:typename:TimeChangeRule
+usEST	NTP_Time.h	/^TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   \/\/Eastern Standard Time = UTC - 5 /;"	v	typeref:typename:TimeChangeRule
+usMDT	NTP_Time.h	/^TimeChangeRule usMDT = {"MDT", Second, dowSunday, Mar, 2, -360};$/;"	v	typeref:typename:TimeChangeRule
+usMST	NTP_Time.h	/^TimeChangeRule usMST = {"MST", First, dowSunday, Nov, 2, -420};$/;"	v	typeref:typename:TimeChangeRule
+usPDT	NTP_Time.h	/^TimeChangeRule usPDT = {"PDT", Second, dowSunday, Mar, 2, -420};$/;"	v	typeref:typename:TimeChangeRule
+usPST	NTP_Time.h	/^TimeChangeRule usPST = {"PST", First, dowSunday, Nov, 2, -480};$/;"	v	typeref:typename:TimeChangeRule
+utc	NTP_Time.h	/^time_t utc = 0;$/;"	v	typeref:typename:time_t
