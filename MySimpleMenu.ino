@@ -6,15 +6,17 @@
 #include <WiFiUdp.h>
 #include "battery.h"
 #include <EEPROM.h>
-// Zone reference "euCET" Central European Time (Frankfurt, Paris)
-TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     //Central European Summer Time
-TimeChangeRule  CET = {"CET ", Last, Sun, Oct, 3, 60};      //Central European Standard Time
-Timezone euCET(CEST, CET);
+
 const char* ntpServerName = "time.google.com";
 #define eepromAddrSSID 5
 #define eepromAddrPASS 35
+#define eepromAddrTimeZ 60
+#define eepromAddrRotation 65
 
+// Zone reference 
+Timezone euCET(eepromAddrTimeZ);
 #define TIMEZONE euCET
+
 
 
 WiFiUDP Udp;
@@ -22,13 +24,21 @@ String ssid;
 String pass;
 unsigned int localPort = 8888;  // local port to listen for UDP packets
 
+
 TFT_eSPI tft = TFT_eSPI();  // Invoke library, pins defined in User_Setup.h
 #include "menu.h"
+
+
+
+#define BTN_1 35
+#define BTN_2 0
 
 byte omm = 99;
 bool initial = 1;
 byte xcolon = 0;
 bool networkConn = false;
+byte btn_up =BTN_1;
+byte btn_dw =BTN_2;
 
 
 
@@ -42,12 +52,15 @@ void setup(void) {
   Serial.println("Booting...");
   ssid = EEPROM.readString(eepromAddrSSID);
   pass = EEPROM.readString(eepromAddrPASS);
+  Serial.println(ssid);
+  Serial.println(pass);
 
   Serial.println(__TIME__);
   Serial.println(__DATE__);
 
   tft.init();
-  tft.setRotation(3);
+  tft.setRotation(EEPROM.readInt(eepromAddrRotation));
+  setBtnAcordingrotation(EEPROM.readInt(eepromAddrRotation));
   tft.fillScreen(TFT_BLACK);
   tft.setTextColor(TFT_RED, TFT_BLACK); // Note: the new fonts do not draw the background colour
   tft.setTextSize(2);
@@ -65,7 +78,10 @@ void setup(void) {
   Serial.println("waiting for sync");
   Udp.begin(localPort);
   setSyncProvider(getNtpTime);
-  setSyncInterval( 24*3600); //24*1h
+  setSyncInterval( 24 * 3600); //24*1h
+//  TIMEZONE.readRules(eepromTimeZ);
+  int tz = EEPROM.readInt(eepromAddrTimeZ);
+  checkTimeZone(tz);
 }
 
 
@@ -80,7 +96,7 @@ void loop()
     }
   }
   delay(100);
-  if (digitalRead(0) == LOW)
+  if (digitalRead(btn_up) == LOW)
     menu();
 }
 
@@ -188,11 +204,11 @@ time_t getNtpTime()
 {
   IPAddress ntpServerIP; // NTP server's ip address
   time_t utc ;//= now();
-  
-    if (WiFi.status() != WL_CONNECTED)
-      WiFiConn();
-    if (WiFi.status() != WL_CONNECTED)
-      return utc;
+
+  if (WiFi.status() != WL_CONNECTED)
+    WiFiConn();
+  if (WiFi.status() != WL_CONNECTED)
+    return utc;
   while (Udp.parsePacket() > 0) ; // discard any previously received packets
   Serial.println("Transmit NTP Request");
   // get a random server from the pool
@@ -255,7 +271,7 @@ bool WiFiConn()
   Serial.println(ssid);
   tft.println("Connecting to:");
   tft.println(ssid);
-//  tft.println(pass);
+  //  tft.println(pass);
   WiFi.begin(ssid.c_str(), pass.c_str());
 
   while (WiFi.status() != WL_CONNECTED && (cntTry < 20) ) {

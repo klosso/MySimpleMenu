@@ -9,22 +9,35 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20220828.0/
-BST	NTP_Time.h	/^TimeChangeRule BST = {"BST", Last, Sun, Mar, 1, 60};        \/\/British Summer (Daylight saving)/;"	v	typeref:typename:TimeChangeRule
+BST	menu.h	/^TimeChangeRule BST = {"BST", Last, Sun, Mar, 1, 60};        \/\/British Summer (Daylight saving)/;"	v	typeref:typename:TimeChangeRule
 BTN_DW	menu.h	/^#define BTN_DW /;"	d
 BTN_UP	menu.h	/^#define BTN_UP /;"	d
-CEST	NTP_Time.h	/^TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     \/\/Central European Summer Time$/;"	v	typeref:typename:TimeChangeRule
-CET	NTP_Time.h	/^TimeChangeRule  CET = {"CET ", Last, Sun, Oct, 3, 60};      \/\/Central European Standard Time$/;"	v	typeref:typename:TimeChangeRule
+CEST	menu.h	/^TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     \/\/Central European Summer Time$/;"	v	typeref:typename:TimeChangeRule
+CET	menu.h	/^TimeChangeRule  CET = {"CET ", Last, Sun, Oct, 3, 60};      \/\/Central European Standard Time$/;"	v	typeref:typename:TimeChangeRule
 DISPLAY_WIDTH	menu.h	/^int16_t DISPLAY_WIDTH = tft.width();$/;"	v	typeref:typename:int16_t
+EEDT	menu.h	/^TimeChangeRule EEDT = {"EEDT", Last, Sun, Mar, 2, 180};  \/\/Eastern Daylight Time = UTC - 4 hou/;"	v	typeref:typename:TimeChangeRule
+EEST	menu.h	/^TimeChangeRule EEST = {"EEST", Last, Sun, Oct, 3, 120};   \/\/Eastern Standard Time = UTC - 5 ho/;"	v	typeref:typename:TimeChangeRule
 FONT_LINE_WIDTH	menu.h	/^byte FONT_LINE_WIDTH = tft.width() \/ tft.textWidth(".", 1);$/;"	v	typeref:typename:byte
-GMT	NTP_Time.h	/^TimeChangeRule GMT = {"GMT", Last, Sun, Oct, 2, 0};         \/\/Standard Time$/;"	v	typeref:typename:TimeChangeRule
+GMT	menu.h	/^TimeChangeRule GMT = {"GMT", Last, Sun, Oct, 2, 0};         \/\/Standard Time$/;"	v	typeref:typename:TimeChangeRule
 LINE_HEIGHT	menu.h	/^int LINE_HEIGHT = 12;$/;"	v	typeref:typename:int
 LONG_PRESS	menu.h	/^#define LONG_PRESS /;"	d
 MAX_LINES	menu.h	/^#define MAX_LINES /;"	d
 MySimpleMenu	README.md	/^# MySimpleMenu$/;"	c
-NTP_PACKET_SIZE	NTP_Time.h	/^const int NTP_PACKET_SIZE = 48; \/\/ NTP time stamp is in the first 48 bytes of the message$/;"	v	typeref:typename:const int
-TIMEZONE	NTP_Time.h	/^#define TIMEZONE /;"	d
-aEDT	NTP_Time.h	/^TimeChangeRule aEDT = {"AEDT", First, Sun, Oct, 2, 660};    \/\/UTC + 11 hours$/;"	v	typeref:typename:TimeChangeRule
-aEST	NTP_Time.h	/^TimeChangeRule aEST = {"AEST", First, Sun, Apr, 3, 600};    \/\/UTC + 10 hours$/;"	v	typeref:typename:TimeChangeRule
+UTC	menu.h	/^TimeChangeRule  UTC = {"UTC ", First, Sun, Jan, 1, 0};      \/\/Universal Standard Time$/;"	v	typeref:typename:TimeChangeRule
+UTC_1	menu.h	/^TimeChangeRule UTC_1 = {"UTC+1", First, Sun, Jan, 1, 60}; \/\/UTC+1$/;"	v	typeref:typename:TimeChangeRule
+UTC_10	menu.h	/^TimeChangeRule UTC_10 = {"UTC10", First, Sun, Jan, 1, 600}; \/\/UTC+10$/;"	v	typeref:typename:TimeChangeRule
+UTC_11	menu.h	/^TimeChangeRule UTC_11 = {"UTC11", First, Sun, Jan, 1, 660}; \/\/UTC+11$/;"	v	typeref:typename:TimeChangeRule
+UTC_12	menu.h	/^TimeChangeRule UTC_12 = {"UTC12", First, Sun, Jan, 1, 720}; \/\/UTC+12$/;"	v	typeref:typename:TimeChangeRule
+UTC_2	menu.h	/^TimeChangeRule UTC_2 = {"UTC+2", First, Sun, Jan, 1, 120}; \/\/UTC+2$/;"	v	typeref:typename:TimeChangeRule
+UTC_3	menu.h	/^TimeChangeRule UTC_3 = {"UTC+3", First, Sun, Jan, 1, 180}; \/\/UTC+3$/;"	v	typeref:typename:TimeChangeRule
+UTC_4	menu.h	/^TimeChangeRule UTC_4 = {"UTC+4", First, Sun, Jan, 1, 240}; \/\/UTC+4$/;"	v	typeref:typename:TimeChangeRule
+UTC_5	menu.h	/^TimeChangeRule UTC_5 = {"UTC+5", First, Sun, Jan, 1, 300}; \/\/UTC+5$/;"	v	typeref:typename:TimeChangeRule
+UTC_6	menu.h	/^TimeChangeRule UTC_6 = {"UTC+6", First, Sun, Jan, 1, 360}; \/\/UTC+6$/;"	v	typeref:typename:TimeChangeRule
+UTC_7	menu.h	/^TimeChangeRule UTC_7 = {"UTC+7", First, Sun, Jan, 1, 420}; \/\/UTC+7$/;"	v	typeref:typename:TimeChangeRule
+UTC_8	menu.h	/^TimeChangeRule UTC_8 = {"UTC+8", First, Sun, Jan, 1, 480}; \/\/UTC+8$/;"	v	typeref:typename:TimeChangeRule
+UTC_9	menu.h	/^TimeChangeRule UTC_9 = {"UTC+9", First, Sun, Jan, 1, 540}; \/\/UTC+9$/;"	v	typeref:typename:TimeChangeRule
+aEDT	menu.h	/^TimeChangeRule aEDT = {"AEDT", First, Sun, Oct, 2, 660};    \/\/UTC + 11 hours$/;"	v	typeref:typename:TimeChangeRule
+aEST	menu.h	/^TimeChangeRule aEST = {"AEST", First, Sun, Apr, 3, 600};    \/\/UTC + 10 hours$/;"	v	typeref:typename:TimeChangeRule
 battery0_bits	battery.h	/^static unsigned char battery0_bits[] = {$/;"	v	typeref:typename:unsigned char[]
 battery0_height	battery.h	/^#define battery0_height /;"	d
 battery0_width	battery.h	/^#define battery0_width /;"	d
@@ -45,44 +58,24 @@ battery5_height	battery.h	/^#define battery5_height /;"	d
 battery5_width	battery.h	/^#define battery5_width /;"	d
 checkBT_DW	menu.h	/^byte checkBT_DW()$/;"	f	typeref:typename:byte
 checkBT_UP	menu.h	/^byte checkBT_UP()$/;"	f	typeref:typename:byte
-decodeNTP	NTP_Time.h	/^bool decodeNTP(void)$/;"	f	typeref:typename:bool
+checkTimeZone	menu.h	/^void checkTimeZone(int in)$/;"	f	typeref:typename:void
 eepromPASS	menu.h	/^#define eepromPASS /;"	d
 eepromSSID	menu.h	/^#define eepromSSID /;"	d
+eepromTimeZ	menu.h	/^#define eepromTimeZ /;"	d
+getIntVal	menu.h	/^int getIntVal(const String& title, const String& valName, const int min, const int max, const in/;"	f	typeref:typename:int
 getStringMenu	menu.h	/^String getStringMenu(const char* title)$/;"	f	typeref:typename:String
-lastMinute	NTP_Time.h	/^uint8_t lastMinute = 0;$/;"	v	typeref:typename:uint8_t
-lastRecvTime	NTP_Time.h	/^uint32_t lastRecvTime = 0;$/;"	v	typeref:typename:uint32_t
-lastTickTime	NTP_Time.h	/^uint32_t lastTickTime = 0;$/;"	v	typeref:typename:uint32_t
-localPort	NTP_Time.h	/^unsigned int localPort = 2390;      \/\/ local port to listen for UDP packets$/;"	v	typeref:typename:unsigned int
 menu	menu.h	/^void menu()$/;"	f	typeref:typename:void
 menuList	menu.h	/^int menuList(const char* title, const String list[])$/;"	f	typeref:typename:int
-newRecvTime	NTP_Time.h	/^uint32_t newRecvTime = 0;$/;"	v	typeref:typename:uint32_t
-newTickTime	NTP_Time.h	/^uint32_t newTickTime = 0;$/;"	v	typeref:typename:uint32_t
-nextSendTime	NTP_Time.h	/^uint32_t nextSendTime = 0;$/;"	v	typeref:typename:uint32_t
-no_packet_count	NTP_Time.h	/^uint32_t no_packet_count = 0;$/;"	v	typeref:typename:uint32_t
-ntpServerName	NTP_Time.h	/^const char* ntpServerName = "pool.ntp.org";$/;"	v	typeref:typename:const char *
-ntpServerName	NTP_Time.h	/^const char* ntpServerName = "time.google.com";$/;"	v	typeref:typename:const char *
-ntp_start	NTP_Time.h	/^bool ntp_start = 1;$/;"	v	typeref:typename:bool
-packetBuffer	NTP_Time.h	/^byte packetBuffer[ NTP_PACKET_SIZE ]; \/\/buffer to hold incoming and outgoing packets$/;"	v	typeref:typename:byte[]
 pressTime	menu.h	/^long pressTime;$/;"	v	typeref:typename:long
 pressedBT_DW	menu.h	/^bool pressedBT_DW = false;$/;"	v	typeref:typename:bool
 pressedBT_UP	menu.h	/^bool pressedBT_UP = false;$/;"	v	typeref:typename:bool
 printLine	menu.h	/^int16_t printLine(const String& txt, const int16_t x, const int16_t y, const uint16_t bg)$/;"	f	typeref:typename:int16_t
-printResponseTime	NTP_Time.h	/^void printResponseTime(uint32_t response, uint32_t  syncTime)$/;"	f	typeref:typename:void
 printRotateLine	menu.h	/^int16_t printRotateLine(const String& txt, const int16_t x, int16_t y, const uint16_t bg)$/;"	f	typeref:typename:int16_t
-printTime	NTP_Time.h	/^void printTime(time_t t, char *tzCode)$/;"	f	typeref:typename:void
-printUTC	NTP_Time.h	/^void printUTC(time_t utc)$/;"	f	typeref:typename:void
-sendNTPpacket	NTP_Time.h	/^void sendNTPpacket(IPAddress& address)$/;"	f	typeref:typename:void
-syncTime	NTP_Time.h	/^bool syncTime(void)$/;"	f	typeref:typename:bool
-timeServerIP	NTP_Time.h	/^IPAddress timeServerIP;                     \/\/ Use server pool$/;"	v	typeref:typename:IPAddress
-timeValid	NTP_Time.h	/^bool timeValid = false;$/;"	v	typeref:typename:bool
-tz1_Code	NTP_Time.h	/^TimeChangeRule *tz1_Code;   \/\/ Pointer to the time change rule, use to get the TZ abbrev, e.g./;"	v	typeref:typename:TimeChangeRule *
-udp	NTP_Time.h	/^WiFiUDP udp;$/;"	v	typeref:typename:WiFiUDP
-usCDT	NTP_Time.h	/^TimeChangeRule usCDT = {"CDT", Second, dowSunday, Mar, 2, -300};$/;"	v	typeref:typename:TimeChangeRule
-usCST	NTP_Time.h	/^TimeChangeRule usCST = {"CST", First, dowSunday, Nov, 2, -360};$/;"	v	typeref:typename:TimeChangeRule
-usEDT	NTP_Time.h	/^TimeChangeRule usEDT = {"EDT", Second, Sun, Mar, 2, -240};  \/\/Eastern Daylight Time = UTC - 4 /;"	v	typeref:typename:TimeChangeRule
-usEST	NTP_Time.h	/^TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   \/\/Eastern Standard Time = UTC - 5 /;"	v	typeref:typename:TimeChangeRule
-usMDT	NTP_Time.h	/^TimeChangeRule usMDT = {"MDT", Second, dowSunday, Mar, 2, -360};$/;"	v	typeref:typename:TimeChangeRule
-usMST	NTP_Time.h	/^TimeChangeRule usMST = {"MST", First, dowSunday, Nov, 2, -420};$/;"	v	typeref:typename:TimeChangeRule
-usPDT	NTP_Time.h	/^TimeChangeRule usPDT = {"PDT", Second, dowSunday, Mar, 2, -420};$/;"	v	typeref:typename:TimeChangeRule
-usPST	NTP_Time.h	/^TimeChangeRule usPST = {"PST", First, dowSunday, Nov, 2, -480};$/;"	v	typeref:typename:TimeChangeRule
-utc	NTP_Time.h	/^time_t utc = 0;$/;"	v	typeref:typename:time_t
+usCDT	menu.h	/^TimeChangeRule usCDT = {"CDT", Second, dowSunday, Mar, 2, -300};$/;"	v	typeref:typename:TimeChangeRule
+usCST	menu.h	/^TimeChangeRule usCST = {"CST", First, dowSunday, Nov, 2, -360};$/;"	v	typeref:typename:TimeChangeRule
+usEDT	menu.h	/^TimeChangeRule usEDT = {"EDT", Second, Sun, Mar, 2, -240};  \/\/Eastern Daylight Time = UTC - 4 /;"	v	typeref:typename:TimeChangeRule
+usEST	menu.h	/^TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   \/\/Eastern Standard Time = UTC - 5 /;"	v	typeref:typename:TimeChangeRule
+usMDT	menu.h	/^TimeChangeRule usMDT = {"MDT", Second, dowSunday, Mar, 2, -360};$/;"	v	typeref:typename:TimeChangeRule
+usMST	menu.h	/^TimeChangeRule usMST = {"MST", First, dowSunday, Nov, 2, -420};$/;"	v	typeref:typename:TimeChangeRule
+usPDT	menu.h	/^TimeChangeRule usPDT = {"PDT", Second, dowSunday, Mar, 2, -420};$/;"	v	typeref:typename:TimeChangeRule
+usPST	menu.h	/^TimeChangeRule usPST = {"PST", First, dowSunday, Nov, 2, -480};$/;"	v	typeref:typename:TimeChangeRule

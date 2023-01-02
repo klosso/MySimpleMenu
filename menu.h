@@ -1,8 +1,8 @@
 #include <WiFi.h>
 #include<EEPROM.h>
 
-#define BTN_UP 0
-#define BTN_DW 35
+#define BTN_1 35
+#define BTN_2 0
 #define MAX_LINES 15
 int LINE_HEIGHT = 12;
 byte FONT_LINE_WIDTH = tft.width() / tft.textWidth(".", 1);
@@ -11,9 +11,18 @@ byte FONT_LINE_WIDTH = tft.width() / tft.textWidth(".", 1);
 #define eepromSSID 5
 #define eepromPASS 35
 
+#ifndef eepromTimeZ
+#define eepromTimeZ 60
+#endif
+#ifndef eepromAddrRotation
+#define eepromAddrRotation 65
+#endif
+
 long pressTime;
 bool pressedBT_DW = false;
 bool pressedBT_UP = false;
+extern byte btn_up;
+extern byte btn_dw;
 int16_t DISPLAY_WIDTH = tft.width();
 
 int menuList(const char* title, const String list[]);
@@ -23,40 +32,223 @@ int getIntVal(const String& title, const String& valName, const int min, const i
 byte checkBT_DW();
 byte checkBT_UP();
 
+void checkTimeZone(int in);
+
+
+
+// Zone reference "euCET" Central European Time (Frankfurt, Paris)
+TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     //Central European Summer Time
+TimeChangeRule  CET = {"CET ", Last, Sun, Oct, 3, 60};      //Central European Standard Time
+TimeChangeRule  UTC = {"UTC ", First, Sun, Jan, 1, 0};      //Universal Standard Time
+
+// Zone reference "UK" United Kingdom (London, Belfast)
+TimeChangeRule BST = {"BST", Last, Sun, Mar, 1, 60};        //British Summer (Daylight saving) Time
+TimeChangeRule GMT = {"GMT", Last, Sun, Oct, 2, 0};         //Standard Time
+Timezone UK(BST, GMT);
+
+// Zone reference "ausET" Australia Eastern Time Zone (Sydney, Melbourne)
+TimeChangeRule aEDT = {"AEDT", First, Sun, Oct, 2, 660};    //UTC + 11 hours
+TimeChangeRule aEST = {"AEST", First, Sun, Apr, 3, 600};    //UTC + 10 hours
+// Zone reference "usET US Eastern Time Zone (New York, Detroit)
+TimeChangeRule usEDT = {"EDT", Second, Sun, Mar, 2, -240};  //Eastern Daylight Time = UTC - 4 hours
+TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   //Eastern Standard Time = UTC - 5 hours
+// Zone reference "usCT" US Central Time Zone (Chicago, Houston)
+TimeChangeRule usCDT = {"CDT", Second, dowSunday, Mar, 2, -300};
+TimeChangeRule usCST = {"CST", First, dowSunday, Nov, 2, -360};
+// Zone reference "usMT" US Mountain Time Zone (Denver, Salt Lake City)
+// Zone reference "usAZ" Arizona is US Mountain Time Zone but does not use DST
+TimeChangeRule usMDT = {"MDT", Second, dowSunday, Mar, 2, -360};
+TimeChangeRule usMST = {"MST", First, dowSunday, Nov, 2, -420};
+// Zone reference "usPT" US Pacific Time Zone (Las Vegas, Los Angeles)
+TimeChangeRule usPDT = {"PDT", Second, dowSunday, Mar, 2, -420};
+TimeChangeRule usPST = {"PST", First, dowSunday, Nov, 2, -480};
+// Zone reference "eufET US EEST
+TimeChangeRule EEDT = {"EEDT", Last, Sun, Mar, 2, 180};  //Eastern Daylight Time = UTC - 4 hours
+TimeChangeRule EEST = {"EEST", Last, Sun, Oct, 3, 120};   //Eastern Standard Time = UTC - 5 hours
+
+TimeChangeRule UTC_1 = {"UTC+1", First, Sun, Jan, 1, 60}; //UTC+1
+TimeChangeRule UTC_2 = {"UTC+2", First, Sun, Jan, 1, 120}; //UTC+2
+TimeChangeRule UTC_3 = {"UTC+3", First, Sun, Jan, 1, 180}; //UTC+3
+TimeChangeRule UTC_4 = {"UTC+4", First, Sun, Jan, 1, 240}; //UTC+4
+TimeChangeRule UTC_5 = {"UTC+5", First, Sun, Jan, 1, 300}; //UTC+5
+TimeChangeRule UTC_6 = {"UTC+6", First, Sun, Jan, 1, 360}; //UTC+6
+TimeChangeRule UTC_7 = {"UTC+7", First, Sun, Jan, 1, 420}; //UTC+7
+TimeChangeRule UTC_8 = {"UTC+8", First, Sun, Jan, 1, 480}; //UTC+8
+TimeChangeRule UTC_9 = {"UTC+9", First, Sun, Jan, 1, 540}; //UTC+9
+TimeChangeRule UTC_10 = {"UTC10", First, Sun, Jan, 1, 600}; //UTC+10
+TimeChangeRule UTC_11 = {"UTC11", First, Sun, Jan, 1, 660}; //UTC+11
+TimeChangeRule UTC_12 = {"UTC12", First, Sun, Jan, 1, 720}; //UTC+12
+
+
+void menuWiFi();
+void menuRotation();
+void menuSave();
+void menuTimeZone();
+
 void menu()
 {
-  String menuItems[30];
-  pinMode(BTN_UP, INPUT_PULLUP);
-  pinMode(BTN_DW, INPUT_PULLUP);
-  byte i = 2;
+  int item = 0;
+  pinMode(BTN_1, INPUT_PULLUP);
+  pinMode(BTN_2, INPUT_PULLUP);
+  String menuItems[] = {"WiFi", "Set timezone", "Set rotation", "Save setting", "Exit", ""};
+  do {
+    item = menuList("Setup:", menuItems);
+    switch (item) {
+      case 0:
+        menuWiFi();
+        break;
+      case 1:
+        menuTimeZone();
+        break;
+      case 2:
+        menuRotation();
+        break;
+      case 3:
+        menuSave();
+        break;
+    }
+  } while (item != 4  );
   tft.fillScreen(TFT_BLACK);
-  tft.drawString("Scanning WiFi:...", 0, 0);
-  WiFi.mode(WIFI_STA);
-  WiFi.disconnect();
-  delay(100);
-  int n = WiFi.scanNetworks();
-  for (i = 0; i < n; i++)
-    menuItems[i] = WiFi.SSID(i).c_str();
-  menuItems[++i] = String();
+}
 
-  int ret = menuList("WiFi Netrorks:", menuItems);
-  ssid = menuItems[ret];
-  //  EEPROM.writeString(eepromSSID, ssid);
-  delay(1000);
 
-  pass = getStringMenu("Set password");
-  //  EEPROM.writeString(eepromPASS, pass);
-  //  EEPROM.commit();
-  delay(1000);
-
-  String menuItemsZone[30] = {"Eur/Warsaw", "Eur/+2", "BASS", "US/TX", "dupa jasiu stasiu pupasiu pierdziasiu", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"};
-  menuItemsZone[2] = "BASS    -16dB";
-  if (menuList("Time zone:", menuItemsZone) == 2)
-  {
-    getIntVal("Tone", "BASS", -20, 20, 0, "dB");
+void setBtnAcordingrotation(int in)
+{
+  const int MenuLeftTop =2;
+  if (in < MenuLeftTop ) {
+    btn_up = BTN_1;
+    btn_dw = BTN_2;
   }
+  else {
+    btn_up = BTN_2;
+    btn_dw = BTN_1;
+  }
+}
+
+void menuRotation()
+{
+  String menuItems[] = {"left", "top", "right", "bottom", ""};
+  int item = menuList("Rotation:", menuItems);
+  tft.setRotation(item);
+  setBtnAcordingrotation(item);
+  EEPROM.writeInt(eepromAddrRotation, item);
+  EEPROM.commit();
+  delay(1000);
+}
+
+
+void menuWiFi()
+{
+  String menuItems[] = {"WiFi Network", "WiFi password", "Save WiFi settings", "Set some shity variable", "...back", ""};
+  String WiFiNetworks[30];
+  int item = 0;
+  int i, n, ret = 0;
+  do {
+    item = menuList("WiFi Setup:", menuItems);
+    switch (item)
+    {
+      case 0:
+        tft.fillScreen(TFT_BLACK);
+        tft.drawString("Scanning WiFi:...", 0, 0);
+        WiFi.mode(WIFI_STA);
+        WiFi.disconnect();
+        delay(100);
+        n = WiFi.scanNetworks();
+        for (i = 0; i < n; i++)
+          WiFiNetworks[i] = WiFi.SSID(i).c_str();
+        WiFiNetworks[++i] = String();
+
+        ret = menuList("WiFi Netrorks:", WiFiNetworks);
+        ssid = menuItems[ret];
+        break;
+      case 1:
+        pass = getStringMenu("Set password");
+        break;
+      case 2:
+        menuSave();
+        break;
+      case 3:
+        getIntVal("setup variable ", "Shit", -10, 30, -2, "dBm");
+        break;
+    }
+  } while ( item < 4);
+}
+
+void menuSave()
+{
+  EEPROM.writeString(eepromPASS, pass);
+  EEPROM.writeString(eepromSSID, ssid);
+  EEPROM.commit();
+  delay(1000);
 
 }
+
+void menuTimeZone()
+{
+  String menuItemsZone[30] = {"UTC", "Eur/Warsaw", "US/TX", "+1", "+2", "EEST +3h/DST(Finland,/Syria/Cyprus)", "+4", "+5", "+6", "+7", "+8", "+9", "+10", "+11", "+12", "-12", "-11", "-10", "-9", "-8", "-7", "-6", "-5", "-4", "-3h", "-2h", "-1h"};
+  int tz = menuList("Time zone:", menuItemsZone);
+  checkTimeZone(tz);
+  EEPROM.writeInt(eepromTimeZ, tz);
+  EEPROM.commit();
+  delay(1000);
+}
+
+
+
+
+void checkTimeZone(int in)
+{
+
+  switch (in)
+  {
+    case 0:
+      TIMEZONE.setRules(UTC, UTC);
+      break;
+    default:
+    case 1:
+      TIMEZONE.setRules(CEST, CET);
+      break;
+    case 2:
+      TIMEZONE.setRules(UTC_1, UTC_1);
+      break;
+    case 3:
+      TIMEZONE.setRules(UTC_2, UTC_2);
+      break;
+    case 4:
+      TIMEZONE.setRules(UTC_3, UTC_3);
+      break;
+    case 5:
+      TIMEZONE.setRules(UTC_4, UTC_4);
+      break;
+    case 6:
+      TIMEZONE.setRules(UTC_5, UTC_5);
+      break;
+    case 7:
+      TIMEZONE.setRules(UTC_6, UTC_6);
+      break;
+    case 8:
+      TIMEZONE.setRules(UTC_7, UTC_7);
+      break;
+    case 9:
+      TIMEZONE.setRules(UTC_8, UTC_8);
+      break;
+    case 10:
+      TIMEZONE.setRules(UTC_9, UTC_9);
+      break;
+    case 11:
+      TIMEZONE.setRules(UTC_10, UTC_10);
+      break;
+    case 12:
+      TIMEZONE.setRules(UTC_11, UTC_11);
+      break;
+    case 13:
+      TIMEZONE.setRules(UTC_12, UTC_12);
+      break;
+
+      //      TIMEZONE.writeRules(eepromTimeZ);
+  }
+}
+
 
 
 
@@ -150,11 +342,6 @@ int getIntVal(const String& title, const String& valName, const int min, const i
     else if ( bt == 3)
       return val;
     printLine(valName + " : " + val + units, 0, 3 * LINE_HEIGHT, TFT_BLACK);
-//    tft.setCursor (0, 3 * LINE_HEIGHT);
-//    tft.print( valName );
-//    tft.print( " : " );
-//    tft.print( val );
-//    tft.print( units );
     delay(100);
   }
 }
@@ -232,16 +419,16 @@ String getStringMenu(const char* title)
 byte checkBT_DW()
 {
   //ret 1 - pressed ,2 released , 3- long press
-  if ( (digitalRead(BTN_DW) == LOW) && (pressedBT_DW == false) ) {
+  if ( (digitalRead(btn_dw) == LOW) && (pressedBT_DW == false) ) {
     pressedBT_DW = true;
     pressTime = millis();
     return 1;
 
-  } else if ( (digitalRead(BTN_DW) == HIGH)  && (pressedBT_DW == true) ) {
+  } else if ( (digitalRead(btn_dw) == HIGH)  && (pressedBT_DW == true) ) {
     pressedBT_DW = false;
     return 2;
   }
-  else if ((digitalRead(BTN_DW) == LOW) && (pressedBT_DW == true) && (( millis() - pressTime) > LONG_PRESS)) {
+  else if ((digitalRead(btn_dw) == LOW) && (pressedBT_DW == true) && (( millis() - pressTime) > LONG_PRESS)) {
     pressedBT_DW = false;
     return 3;
   }
@@ -250,16 +437,16 @@ byte checkBT_DW()
 byte checkBT_UP()
 {
   //ret 1 - pressed ,2 released , 3- long press
-  if ( (digitalRead(BTN_UP) == LOW) && (pressedBT_UP == false) ) {
+  if ( (digitalRead(btn_up) == LOW) && (pressedBT_UP == false) ) {
     pressedBT_UP = true;
     pressTime = millis();
     return 1;
 
-  } else if ( (digitalRead(BTN_UP) == HIGH)  && (pressedBT_UP == true) ) {
+  } else if ( (digitalRead(btn_up) == HIGH)  && (pressedBT_UP == true) ) {
     pressedBT_UP = false;
     return 2;
   }
-  else if ((digitalRead(BTN_UP) == LOW) && (pressedBT_UP == true) && (( millis() - pressTime) > LONG_PRESS)) {
+  else if ((digitalRead(btn_up) == LOW) && (pressedBT_UP == true) && (( millis() - pressTime) > LONG_PRESS)) {
     pressedBT_UP = false;
     return 3;
   }

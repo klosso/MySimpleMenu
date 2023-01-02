@@ -1,0 +1,29 @@
+
+
+VIM - Vi IMproved 9.0 (2022 Jun 28, compiled Sep 01 2022 21:10:19)
+Included patches: 1-354
+Compiled by Arch Linux
+Huge version with GTK3 GUI.  Features included (+) or not (-):
++acl               +cindent           +cursorshape       +file_in_path      +job               +menu              +mouse_urxvt       +popupwin          +signs             -tag_any_white     +user_commands     +windows
++arabic            +clientserver      +dialog_con_gui    +find_in_path      +jumplist          +mksession         +mouse_xterm       +postscript        +smartindent       +tcl/dyn           +vartabs           +writebackup
++autocmd           +clipboard         +diff              +float             +keymap            +modify_fname      +multi_byte        +printer           -sodium            +termguicolors     +vertsplit         +X11
++autochdir         +cmdline_compl     +digraphs          +folding           +lambda            +mouse             +multi_lang        +profile           +sound             +terminal          +vim9script        -xfontset
+-autoservername    +cmdline_hist      +dnd               -footer            +langmap           +mouseshape        -mzscheme          -python            +spell             +terminfo          +viminfo           +xim
++balloon_eval      +cmdline_info      -ebcdic            +fork()            +libcall           +mouse_dec         +netbeans_intg     +python3/dyn       +startuptime       +termresponse      +virtualedit       -xpm
++balloon_eval_term +comments          +emacs_tags        +gettext           +linebreak         +mouse_gpm         +num64             +quickfix          +statusline        +textobjects       +visual            +xsmp_interact
++browse            +conceal           +eval              -hangul_input      +lispindent        -mouse_jsbterm     +packages          +reltime           -sun_workshop      +textprop          +visualextra       +xterm_clipboard
+++builtin_terms    +cryptv            +ex_extra          +iconv             +listcmds          +mouse_netterm     +path_extra        +rightleft         +syntax            +timers            +vreplace          -xterm_save
++byte_offset       +cscope            +extra_search      +insert_expand     +localmap          +mouse_sgr         +perl/dyn          +ruby/dyn          +tag_binary        +title             +wildignore        
++channel           +cursorbind        -farsi             +ipv6              +lua/dyn           -mouse_sysmouse    +persistent_undo   +scrollbind        -tag_old_static    +toolbar           +wildmenu          
+   system vimrc file: "/etc/vimrc"
+     user vimrc file: "$HOME/.vimrc"
+ 2nd user vimrc file: "~/.vim/vimrc"
+      user exrc file: "$HOME/.exrc"
+  system gvimrc file: "/etc/gvimrc"
+    user gvimrc file: "$HOME/.gvimrc"
+2nd user gvimrc file: "~/.vim/gvimrc"
+       defaults file: "$VIMRUNTIME/defaults.vim"
+    system menu file: "$VIMRUNTIME/menu.vim"
+  fall-back for $VIM: "/usr/share/vim"
+Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H -DFEAT_GUI_GTK -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/sysprof-4 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/lzo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/gio-unix-2.0 -I/usr/include/cloudproviders -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include -I/usr/include/at-spi-2.0 -pthread -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection -g -ffile-prefix-map=/build/vim/src=/usr/src/debug -flto=auto -D_REENTRANT -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 
+Linking: gcc -L. -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed -Wl,-E -Wl,-rpath,/usr/lib/perl5/5.36/core_perl/CORE -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -flto=auto -L/usr/local/lib -o vim -lgtk-3 -lgdk-3 -lz -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lSM -lICE -lXt -lX11 -lXdmcp -lSM -lICE -lm -ltinfo -lelf -lcanberra -lacl -lattr -lgpm -Wl,-E -Wl,-rpath,/usr/lib/perl5/5.36/core_perl/CORE -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -flto -fstack-protector-strong -L/usr/local/lib -L/usr/lib/perl5/5.36/core_perl/CORE -lperl -lpthread -ldl -lm -lcrypt -lutil -lc -L/usr/lib -ltclstub8.6 -ldl -lz -lpthread -lm 
